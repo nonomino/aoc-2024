@@ -12,8 +12,8 @@ runall: main.go run.go
 	go run . -a
 
 test:
-	go test ./day*
-	go test ./utils
+	go test -cover ./day*
+	go test -cover ./utils
 
 build: main.go run.go
 	go build -o aoc_run .
