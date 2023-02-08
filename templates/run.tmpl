@@ -10,9 +10,10 @@ import (
 )
 
 var days = []aocRunnerInput{
-		{{- range .DayDirectories }}
-		{"{{ .Name }}", {{ .Name }}.Solve, "inputs/day{{ printf "%02d" .Day }}.txt"},
-{{ end }}}
+	{{- range .DayDirectories }}
+	{"{{ .Name }}", {{ .Name }}.Solve, "inputs/day{{ printf "%02d" .Day }}.txt"},
+	{{- end }}
+}
 
 func runCurrent() {
 	fmt.Println("Day {{ .CurrentDirectory.Day }} Part {{ .CurrentDirectory.Part }}")

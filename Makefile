@@ -5,14 +5,15 @@ TEMPLATES := $(wildcard templates/*.tmpl)
 run.go: $(GOFILES) $(TEMPLATES)
 	go generate
 
-run: run.go
+run: main.go run.go
 	go run .
 
-runall: run.go
+runall: main.go run.go
 	go run . -a
 
 test:
 	go test ./day*
 	go test ./utils
 
-
+build: main.go run.go
+	go build -o aoc_run .
