@@ -34,8 +34,7 @@ func main() {
 	case 0:
 		runCurrent()
 	default:
-		dayname := fmt.Sprintf("day%02d", DaySelected)
-		runDay(dayname, PartSelected)
+		runDay(DaySelected, PartSelected)
 	}
 }
 
@@ -79,4 +78,38 @@ func runAocPart(partFunc aocFunc, filename string) aocResult {
 	}
 
 	return res
+}
+
+func runAll() {
+	var r aocResult
+	var total time.Duration
+
+	for _, v := range days {
+		r = runAocPart(v.Func, v.Filename)
+		total += r.TimeElapsed
+
+		fmt.Printf("%s: %s time elapsed: %s\n", v.Name, r.Result, r.TimeElapsed)
+	}
+
+	fmt.Printf("Overall time elapsed: %s\n", total)
+}
+
+func runDay(day int, part int) {
+	found := false
+
+	directory := fmt.Sprintf("day%02dp%d", day, part)
+	for _, v := range days {
+		if v.Name == directory {
+			fmt.Printf("%s\n", directory)
+			r := runAocPart(v.Func, v.Filename)
+			fmt.Println(r.Result)
+			fmt.Printf("Time elapsed: %s\n", r.TimeElapsed)
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		fmt.Printf("Did not find a solution for day %d part %d\n", day, part)
+	}
 }

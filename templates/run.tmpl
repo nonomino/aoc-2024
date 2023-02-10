@@ -3,7 +3,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 {{ range .DayDirectories }}
 	{{ .Name }} "aoc/{{ .Name }}"
 	{{- end }}
@@ -20,38 +19,4 @@ func runCurrent() {
 	r := runAocPart({{ .CurrentDirectory.Name }}.Solve, "inputs/day{{ printf "%02d" .CurrentDirectory.Day }}.txt")
 	fmt.Println(r.Result)
 	fmt.Printf("Time elapsed: %s\n", r.TimeElapsed)
-}
-
-func runAll() {
-	var r aocResult
-	var total time.Duration
-
-	for _, v := range days {
-		r = runAocPart(v.Func, v.Filename)
-		total += r.TimeElapsed
-
-		fmt.Printf("%s: %s time elapsed: %s\n", v.Name, r.Result, r.TimeElapsed)
-	}
-
-	fmt.Printf("Overall time elapsed: %s\n", total)
-}
-
-func runDay(dayname string, part int) {
-	found := false
-
-	directory := fmt.Sprintf("%sp%d", dayname, part)
-	for _, v := range days {
-		if v.Name == directory {
-			fmt.Printf("%s\n", directory)
-			r := runAocPart(v.Func, v.Filename)
-			fmt.Println(r.Result)
-			fmt.Printf("Time elapsed: %s\n", r.TimeElapsed)
-			found = true
-			break
-		}
-	}
-
-	if !found {
-		fmt.Printf("Did not find a solution for %s part %d\n", dayname, part)
-	}
 }
