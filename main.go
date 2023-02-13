@@ -49,6 +49,8 @@ type aocRunnerInput struct {
 	Name     string
 	Func     aocFunc
 	Filename string
+	Day      int
+	Part     int
 }
 
 func runAocPart(partFunc aocFunc, filename string) aocResult {
@@ -97,10 +99,9 @@ func runAll() {
 func runDay(day int, part int) {
 	found := false
 
-	directory := fmt.Sprintf("day%02dp%d", day, part)
 	for _, v := range days {
-		if v.Name == directory {
-			fmt.Printf("%s\n", directory)
+		if v.Day == day && v.Part == part {
+			fmt.Printf("Day %d part %d\n", day, part)
 			r := runAocPart(v.Func, v.Filename)
 			fmt.Println(r.Result)
 			fmt.Printf("Time elapsed: %s\n", r.TimeElapsed)
