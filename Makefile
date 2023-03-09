@@ -1,6 +1,6 @@
 GOFILES := $(filter-out run.go, $(wildcard **/*.go))
 TEMPLATES := $(wildcard templates/*.tmpl)
-.PHONY: run runall test build clean start
+.PHONY: run runall test build clean start help
 
 run.go: $(GOFILES) $(TEMPLATES)
 	go generate
@@ -15,8 +15,10 @@ test: ## Run all tests
 	go test -cover ./day*
 	go test -cover ./utils
 
-build: main.go run.go ## Build binary executable aoc_run
+aoc_run: main.go run.go
 	go build -o aoc_run .
+
+build: aoc_run ## Build binary executable aoc_run
 
 clean: ## Clean run.go and aoc_run
 	rm run.go || true
