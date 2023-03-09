@@ -11,15 +11,23 @@ this.
 To start a new day, generate code from a template using the command:
 
 ```
-go run ./start
+make start
 ```
 
-It will default to adding code for the current day. You can specify a different
-day with the `-d` flag. This will create a directory called `dayXXp1` where 
-`XX` is replaced by the day number. Inside will be a file called `solution.go`
-with a `Solve` function in which to put your solution, and a `solution_test.go`
-file to write your tests. The `Solve` function takes an `io.Reader` argument
-which is the input and returns a solution which can be any type.
+It will default to adding code for the current day. This will create a
+directory called `dayXXp1` where `XX` is replaced by the day number. Inside
+will be a file called `solution.go` with a `Solve` function in which to put
+your solution, and a `solution_test.go` file to write your tests. The `Solve`
+function takes an `io.Reader` argument which is the input and returns a
+solution which can be any type.
+
+If you wish to start a problem for a specific day, say the 21st, you can create
+the desired directory from the template by using the make command to create the
+part 1 directory for that day using the command below.
+
+```
+make day21p1
+```
 
 To run the last code you worked on use the command:
 
