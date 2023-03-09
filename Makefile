@@ -29,6 +29,6 @@ help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 day%p1:
-	go run ./start -d $*
+	go run ./start -d $(shell echo $* | sed 's/^0*//')
 
 start: day$(shell date +%d)p1  ## Start today
