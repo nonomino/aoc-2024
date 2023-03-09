@@ -25,7 +25,7 @@ clean: ## Clean run.go and aoc_run
 	rm aoc_run || true
 
 help: ## Show this help
-	@echo "These are the make commands for Advent of Code.\n"
+	@echo "These are the make commands for the solutions to this Advent of Code repository.\n"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 day%p1:
