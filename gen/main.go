@@ -14,13 +14,13 @@ import (
 type DayDirectory struct {
 	Name string
 	Day  int
-	Part int
+	Part string
 }
 
 func newDayDirectory(name string) DayDirectory {
 	res := DayDirectory{Name: name}
 
-	fmt.Sscanf(name, "day%dp%d", &(res.Day), &(res.Part))
+	fmt.Sscanf(name, "day%dp%s", &(res.Day), &(res.Part))
 
 	return res
 }

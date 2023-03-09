@@ -15,12 +15,12 @@ import (
 
 var RunAll bool
 var DaySelected int
-var PartSelected int
+var PartSelected string
 
 func init() {
 	pflag.BoolVarP(&RunAll, "all", "a", false, "run all days")
 	pflag.IntVarP(&DaySelected, "day", "d", 0, "run specific day")
-	pflag.IntVarP(&PartSelected, "part", "p", 2, "run specific part (default 2)")
+	pflag.StringVarP(&PartSelected, "part", "p", "2", "run specific part (default 2)")
 }
 
 func main() {
@@ -50,7 +50,7 @@ type aocRunnerInput struct {
 	Func     aocFunc
 	Filename string
 	Day      int
-	Part     int
+	Part     string
 }
 
 func runAocPart(partFunc aocFunc, filename string) aocResult {
@@ -96,12 +96,12 @@ func runAll() {
 	fmt.Printf("Overall time elapsed: %s\n", total)
 }
 
-func runDay(day int, part int) {
+func runDay(day int, part string) {
 	found := false
 
 	for _, v := range days {
 		if v.Day == day && v.Part == part {
-			fmt.Printf("Day %d part %d\n", day, part)
+			fmt.Printf("Day %d part %s\n", day, part)
 			r := runAocPart(v.Func, v.Filename)
 			fmt.Println(r.Result)
 			fmt.Printf("Time elapsed: %s\n", r.TimeElapsed)
@@ -111,6 +111,6 @@ func runDay(day int, part int) {
 	}
 
 	if !found {
-		fmt.Printf("Did not find a solution for day %d part %d\n", day, part)
+		fmt.Printf("Did not find a solution for day %d part %s\n", day, part)
 	}
 }

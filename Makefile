@@ -30,4 +30,3 @@ day%p1:
 	go run ./start -d $*
 
 start: day$(shell date +%d)p1  ## Start today
-
