@@ -31,4 +31,9 @@ help: ## Show this help
 day%p1:
 	go run ./start -d $(shell echo $* | sed 's/^0*//')
 
+day%p2: day%p1
+	mkdir day$(*)p2
+	- sed -E 's/^package day(.*)p1$$/package day\1p2/' day$(*)p1/solution.go > day$(*)p2/solution.go
+	- sed -E 's/^package day(.*)p1$$/package day\1p2/' day$(*)p1/solution_test.go > day$(*)p2/solution_test.go
+
 start: day$(shell date +%d)p1  ## Start today
