@@ -1,22 +1,23 @@
 GOFILES := $(filter-out run.go, $(wildcard **/*.go))
 TEMPLATES := $(wildcard templates/*.tmpl)
+GO ?= go
 .PHONY: run runall test build clean start help
 
 run.go: $(GOFILES) $(TEMPLATES)
-	go generate
+	$(GO) generate
 
 run: main.go run.go ## run the most recently edited day
-	go run .
+	$(GO) run .
 
 runall: main.go run.go ## Run all days
-	go run . -a
+	$(GO) run . -a
 
 test: ## Run all tests
-	go test -cover ./day*
-	go test -cover ./utils
+	$(GO) test -cover ./day*
+	$(GO) test -cover ./utils
 
 aoc_run: main.go run.go
-	go build -o aoc_run .
+	$(GO) build -o aoc_run .
 
 build: aoc_run ## Build binary executable aoc_run
 
@@ -29,10 +30,10 @@ help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 day%p1:
-	go run ./start -d $(shell echo $* | sed 's/^0*//')
+	$(GO) run ./start -d $(shell echo $* | sed 's/^0*//')
 
 day%p2: day%p1
-	mkdir day$(*)p2
+	mkdir $@
 	- sed -E 's/^package day(.*)p1$$/package day\1p2/' day$(*)p1/solution.go > day$(*)p2/solution.go
 	- sed -E 's/^package day(.*)p1$$/package day\1p2/' day$(*)p1/solution_test.go > day$(*)p2/solution_test.go
 
