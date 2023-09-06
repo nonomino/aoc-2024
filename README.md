@@ -8,7 +8,10 @@ this.
 
 # Instructions
 
-To start a new day, generate code from a template using the command:
+To start a new day, download your input from the advent of code website and put
+it in a file named `dayXX.txt` where `XX` is replaced by the two digit day of
+the month within a subdirectory called `inputs`. Then, to generate code from a
+template using the command:
 
 ```
 make start
@@ -35,8 +38,17 @@ To run the last code you worked on use the command:
 make run
 ```
 
-This will generate a `run.go` file and run the most recently modified code. You
-can run all the days with the command:
+This will generate a `run.go` file and run the most recently modified code. Once
+the first part is finished you can start the second part by using the command:
+
+```
+make day21p2
+```
+
+This will copy your current part 1 code from `day21p1` and update the package
+names. You can then edit that code to complete part 2.
+
+You can run all the days with the command:
 
 ```
 make runall
