@@ -19,5 +19,5 @@ jobs:
         run: go test -cover ./utils
 
       - name: Test solutions
-        if: ${{ github.repository != "devries/aoc_template" }}
+        if: ${{ github.repository != 'devries/aoc_template' }}
         run: go test -cover ./day*
