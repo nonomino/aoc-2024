@@ -118,3 +118,20 @@ func TestReadLines(t *testing.T) {
 		}
 	}
 }
+
+func TestOCR(t *testing.T) {
+	input := `###..###..###...##..###...##...##..####.
+#..#.#..#.#..#.#..#.#..#.#..#.#..#.#....
+#..#.###..#..#.#..#.#..#.#..#.#....###..
+###..#..#.###..####.###..####.#.##.#....
+#.#..#..#.#....#..#.#.#..#..#.#..#.#....
+#..#.###..#....#..#.#..#.#..#..###.#....`
+
+	wanted := "RBPARAGF"
+
+	obtained := OCRLetters(input)
+
+	if strings.Compare(wanted, obtained) != 0 {
+		t.Errorf("Expected %s, got %s", wanted, obtained)
+	}
+}
