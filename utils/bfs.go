@@ -33,9 +33,9 @@ type Graph[T comparable] interface {
 }
 
 // NewBFS creates a new BreadthFirstSearch struct initialized to being a search.
-func NewBFS[T comparable]() BreadthFirstSearch[T] {
+func NewBFS[T comparable]() *BreadthFirstSearch[T] {
 	bfs := BreadthFirstSearch[T]{[]T{}, make(map[T]bool), make(map[T]T), make(map[T]uint64)}
-	return bfs
+	return &bfs
 }
 
 // Run a breadth first search on Graph g returning the final state, or an error

@@ -39,9 +39,9 @@ type Edge[T comparable] struct {
 
 // Prepare a new Dijkstra search structure for notes of type T.
 // T must be comparable and will be used as a map key.
-func NewDijkstra[T comparable]() DijkstraSearch[T] {
+func NewDijkstra[T comparable]() *DijkstraSearch[T] {
 	s := DijkstraSearch[T]{[]T{}, make(map[T]bool), make(map[T]T), make(map[T]uint64), make(map[T]int)}
-	return s
+	return &s
 }
 
 // ---- HEAP DEFINITIONS ----
