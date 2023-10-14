@@ -135,3 +135,67 @@ func TestOCR(t *testing.T) {
 		t.Errorf("Expected %s, got %s", wanted, obtained)
 	}
 }
+
+// This graph satisfies both the BFS interface and Dijkstra interface
+type BFSGraph struct{}
+
+func (b BFSGraph) GetInitial() Point {
+	return Point{X: 0, Y: 0}
+}
+
+func (b BFSGraph) GetNeighbors(p Point) []Point {
+	return []Point{{p.X + 1, p.Y}, {p.X - 1, p.Y}, {p.X, p.Y + 1}, {p.X, p.Y - 1}}
+}
+
+// Give every step a distance of 2 in the Dijkstra search
+func (b BFSGraph) GetEdges(p Point) []Edge[Point] {
+	pts := b.GetNeighbors(p)
+
+	var edges []Edge[Point]
+	for _, np := range pts {
+		e := Edge[Point]{np, 2}
+		edges = append(edges, e)
+	}
+
+	return edges
+}
+
+// Starting at (0,0) the final point is (10,0)
+// Should be 10 steps for BFS and 20 distance for Dijkstra
+func (b BFSGraph) IsFinal(p Point) bool {
+	if p.X == 10 && p.Y == 0 {
+		return true
+	}
+
+	return false
+}
+
+func TestBFS(t *testing.T) {
+	bfs := NewBFS[Point]()
+
+	var m BFSGraph
+
+	v, err := bfs.Run(m)
+	if err != nil {
+		t.Errorf("Error in BFS search: %s", err)
+	}
+
+	if bfs.Distance[v] != 10 {
+		t.Errorf("Expected 10 steps, got %d steps", bfs.Distance[v])
+	}
+}
+
+func TestDijkstra(t *testing.T) {
+	dij := NewDijkstra[Point]()
+
+	var m BFSGraph
+
+	v, err := dij.Run(m)
+	if err != nil {
+		t.Errorf("Error in Dijkstra search: %s", err)
+	}
+
+	if dij.Distance[v] != 20 {
+		t.Errorf("Expected graph distance of 20, got %d", dij.Distance[v])
+	}
+}
