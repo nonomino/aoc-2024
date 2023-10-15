@@ -1,3 +1,5 @@
+// Package utils implements various utility functions and procedures which have
+// been useful for previous Advents of Code.
 package utils
 
 import (
