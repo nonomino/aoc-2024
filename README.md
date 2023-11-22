@@ -54,7 +54,15 @@ You can run all the days with the command:
 make runall
 ```
 
-Finally, you can do tests with the command:
+You can build a binary called `aoc_run` by using the
+
+```
+make build
+```
+
+command.
+
+Finally, you can run your tests with the command:
 
 ```
 make test

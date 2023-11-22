@@ -22,8 +22,8 @@ aoc_run: main.go run.go
 build: aoc_run ## Build binary executable aoc_run
 
 clean: ## Clean run.go and aoc_run
-	rm run.go || true
-	rm aoc_run || true
+	- rm run.go
+	- rm aoc_run
 
 help: ## Show this help
 	@echo "These are the make commands for the solutions to this Advent of Code repository.\n"
