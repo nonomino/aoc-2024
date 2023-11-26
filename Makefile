@@ -13,8 +13,8 @@ runall: main.go run.go ## Run all days
 	$(GO) run . -a
 
 test: ## Run all tests
-	$(GO) test -cover ./day*
 	$(GO) test -cover ./utils
+	$(GO) test -cover ./day*
 
 aoc_run: main.go run.go
 	$(GO) build -o aoc_run .
